@@ -1,8 +1,11 @@
 VERSION=1.0.0.0
-TARGET=test$(VERSION)
-CROSS = 
-CC = $(CROSS)gcc
-CXX = $(CROSS)g++
+TARGET=test$(VERSION).out
+# CROSS = mips64el-linux-gnuabi64
+# CC = $(CROSS)-gcc
+# CXX = $(CROSS)-g++
+
+#CC = clang
+#CXX = clang++	
 
 src_root=.
 build_root=$(shell pwd)
@@ -10,10 +13,16 @@ ifdef src
   src_root:=$(src)
 endif
 
-CFLAGS=-c -Wno-class-memaccess
+# used for cross compiling mips64el
+# CFLAGS="-c -Wno-class-memaccess --sysroot=${SYSROOT}" 
+CFLAGS="-c" 
+
+
+CPPFLAGS=$(CFLAGS)
 incs=$(src_root)
-CCFLAGS=-std=gnu++17
-LDFLAGS=
+#CCFLAGS=-std=gnu++14
+LDFLAGS=-lpthread   ## --sysroot=${SYSROOT}
+#-Wl,--sysroot=${SYSROOT}
 
 sources = $(wildcard $(src_root)/*.cc)
 object_files = $(patsubst %.cc, %.o, $(sources))

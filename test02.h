@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <memory>
 using namespace std;
 
 /*
@@ -16,6 +17,21 @@ static void CheckIsBigEndian(){
   } else {
   }
 }
+
+union TestUnion{
+  std::string str1;
+  std::string str2;
+};
+
+// test for c++11 shared pointer
+void TestSharedPointer();
+
+extern void TestMemoryLeak();
+
+// test for string-keyed map
+void TestStringMap();
+
+void TestStaticCastDeallocatedMemory();
 
 /*
 static void CheckIsBigEndian2(){
